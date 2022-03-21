@@ -13,7 +13,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 @Component
 public class DictionaryReader {
-    private final LocalDate START_DATE = LocalDate.of(2022, 3, 7);
+    private final LocalDate START_DATE = LocalDate.of(2022, 3, 13);
 
     public String getAnswer() {
 
