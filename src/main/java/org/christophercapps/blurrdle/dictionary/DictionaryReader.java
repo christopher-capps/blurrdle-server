@@ -45,4 +45,32 @@ public class DictionaryReader {
         return dictionary.get(puzzleNumber);
     }
 
+    public List<String> getFullDictionary() {
+
+        String dictionaryPath = "dictionary.txt";
+        File inputFile = new File(dictionaryPath);
+        List<String> dictionary = new ArrayList<>();
+
+        try (Scanner inputScanner = new Scanner(inputFile)) {
+            while (inputScanner.hasNextLine()) {
+
+                String line = inputScanner.nextLine();
+                String[] words = line.split(" ");
+                String finalWord = "";
+                for (String word: words) {
+                    for (int i = 0; i < word.length(); i++) {
+                        if (Character.isLetter(word.charAt(i))) {
+                            finalWord += word.charAt(i);
+                        }
+                    }
+                    dictionary.add(finalWord);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR: DICTIONARY FILE NOT FOUND");
+        }
+
+        return dictionary;
+    }
+
 }

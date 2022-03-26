@@ -26,7 +26,7 @@ public class GuessTrackerController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping("")
     public GuessTracker checkGuess(@RequestBody GuessTracker tracker) {
-        return guessChecker.checkGuess(tracker, dictionaryReader.getAnswer());
+        return guessChecker.checkGuess(tracker, dictionaryReader.getAnswer(), dictionaryReader.getFullDictionary());
     }
 
 

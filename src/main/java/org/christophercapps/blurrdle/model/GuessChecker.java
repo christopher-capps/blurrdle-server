@@ -2,12 +2,15 @@ package org.christophercapps.blurrdle.model;
 
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class GuessChecker {
 
-    public GuessTracker checkGuess(GuessTracker tracker, String answer){
 
-        if(tracker.getGuess() == null || tracker.getGuess().length() != answer.length()) {
+    public GuessTracker checkGuess(GuessTracker tracker, String answer, List<String> dictionary){
+
+        if(tracker.getGuess() == null || tracker.getGuess().length() != answer.length() || !dictionary.contains(tracker.getGuess())) {
             return tracker;
         }
 
