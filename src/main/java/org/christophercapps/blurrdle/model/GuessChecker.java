@@ -2,6 +2,7 @@ package org.christophercapps.blurrdle.model;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -68,7 +69,22 @@ public class GuessChecker {
             }
         }
 
-        tracker.setLargestColumn(biggestColumn);
+        List<String> newClues = new ArrayList<>();
+
+        for (int i = biggestColumn; i > 0; i--) {
+            String row = "";
+
+            for (GuessColumn column : tracker.columns) {
+                if (column.getPossibleLetters().size() >= i) {
+                    row += Character.toUpperCase(column.getPossibleLetters().get(i - 1)) + " ";
+                } else {
+                    row += "  ";
+                }
+            }
+            newClues.add(row);
+        }
+
+        tracker.setClueRows(newClues);
 
         return tracker;
     }
