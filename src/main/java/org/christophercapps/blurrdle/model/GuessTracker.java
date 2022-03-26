@@ -13,7 +13,6 @@ public class GuessTracker {
     String guess;
     List<GuessColumn> columns;
     List<String> guessHistory;
-    List<Boolean> wasAHit;
 
     private final DictionaryReader reader = new DictionaryReader();
 
@@ -26,7 +25,6 @@ public class GuessTracker {
 
         for (int i = 0; i < reader.getAnswer().length(); i++) {
             columns.add(new GuessColumn());
-            wasAHit.add(false);
         }
     }
 
@@ -62,9 +60,6 @@ public class GuessTracker {
         this.guessHistory = guessHistory;
     }
 
-    public void markHit(int column) {
-        this.wasAHit.set(column, true);
-    }
 
     public void addLetter(int column, Character letter) {
         columns.get(column).addLetter(letter);
@@ -87,7 +82,6 @@ public class GuessTracker {
             output += "? ";
         }
         output += "\n \n Most recent guess: \n" + guessToString(getGuessHistory().get(getGuessHistory().size()-1));
-        output += "\n" + hitsToString();
 
         return output;
     }
@@ -126,17 +120,6 @@ public class GuessTracker {
         return output;
     }
 
-    private String hitsToString() {
-        String output = "";
-        for (boolean slot : wasAHit) {
-            if (slot) {
-                output += "*  ";
-            } else {
-                output += "   ";
-            }
-        }
-        return output;
-    }
 
 }
 
