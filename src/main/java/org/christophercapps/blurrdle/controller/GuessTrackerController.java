@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/puzzle")
+@CrossOrigin
 public class GuessTrackerController {
 
     private final GuessChecker guessChecker = new GuessChecker();
