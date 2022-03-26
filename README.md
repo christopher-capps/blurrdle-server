@@ -32,7 +32,7 @@ If you were to guess "RANTS", you would recieve the following feedback:
  R  R  A  T  T
  ?  ?  ?  ?  ?
 
-(R)(A) N (T) S
+ R  A  N  T  S
 ```
 
 The letters R, A, and T were all "hits" - meaning that the Target Word contained those letters in the same location or an adjacent location to the word that you guessed. Your job is to use this information to find the Target Word!
