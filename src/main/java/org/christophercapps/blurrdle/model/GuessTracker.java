@@ -13,6 +13,7 @@ public class GuessTracker {
     String guess;
     List<GuessColumn> columns;
     List<String> guessHistory;
+    int largestColumn;
 
     private final DictionaryReader reader = new DictionaryReader();
 
@@ -22,6 +23,7 @@ public class GuessTracker {
         this.guess = " ";
         columns = new ArrayList<>();
         guessHistory = new ArrayList<>();
+        this.largestColumn = 0;
 
         for (int i = 0; i < reader.getAnswer().length(); i++) {
             columns.add(new GuessColumn());
@@ -60,6 +62,13 @@ public class GuessTracker {
         this.guessHistory = guessHistory;
     }
 
+    public int getLargestColumn() {
+        return largestColumn;
+    }
+
+    public void setLargestColumn(int largestColumn) {
+        this.largestColumn = largestColumn;
+    }
 
     public void addLetter(int column, Character letter) {
         columns.get(column).addLetter(letter);

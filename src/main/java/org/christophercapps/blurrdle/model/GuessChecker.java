@@ -60,6 +60,16 @@ public class GuessChecker {
             }
         }
 
+        int biggestColumn = 0;
+
+        for(GuessColumn column : tracker.columns) {
+            if (column.possibleLetters.size() > biggestColumn) {
+                biggestColumn = column.possibleLetters.size();
+            }
+        }
+
+        tracker.setLargestColumn(biggestColumn);
+
         return tracker;
     }
 
