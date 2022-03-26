@@ -26,9 +26,6 @@ public class GuessTracker {
 
         for (int i = 0; i < reader.getAnswer().length(); i++) {
             columns.add(new GuessColumn());
-        }
-
-        for (int i = 0; i< reader.getAnswer().length(); i++) {
             wasAHit.add(false);
         }
     }
