@@ -3,6 +3,7 @@ package org.christophercapps.blurrdle.model;
 import org.christophercapps.blurrdle.dictionary.DictionaryReader;
 import org.christophercapps.blurrdle.dictionary.DictionaryReader;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class GuessTracker {
     String guess;
     List<GuessColumn> columns;
     List<String> guessHistory;
+    List<Boolean> wasAHit;
 
     private final DictionaryReader reader = new DictionaryReader();
 
@@ -24,6 +26,10 @@ public class GuessTracker {
 
         for (int i = 0; i < reader.getAnswer().length(); i++) {
             columns.add(new GuessColumn());
+        }
+
+        for (int i = 0; i< reader.getAnswer().length(); i++) {
+            wasAHit.add(false);
         }
     }
 
@@ -59,6 +65,10 @@ public class GuessTracker {
         this.guessHistory = guessHistory;
     }
 
+    public void markHit(int column) {
+        this.wasAHit.set(column, true);
+    }
+
     public void addLetter(int column, Character letter) {
         columns.get(column).addLetter(letter);
     }
@@ -80,6 +90,7 @@ public class GuessTracker {
             output += "? ";
         }
         output += "\n \n Most recent guess: \n" + guessToString(getGuessHistory().get(getGuessHistory().size()-1));
+        output += "\n" + hitsToString();
 
         return output;
     }
@@ -96,8 +107,15 @@ public class GuessTracker {
 
     private String rowsToString() {
         String output = "";
+        int biggestColumn = 0;
 
-        for (int i = 3; i > 0; i--) {
+        for(GuessColumn column : columns) {
+            if (column.possibleLetters.size() > biggestColumn) {
+                biggestColumn = column.possibleLetters.size();
+            }
+        }
+
+        for (int i = biggestColumn; i > 0; i--) {
             for (GuessColumn column : columns) {
                 if (column.getPossibleLetters().size() >= i) {
                     output += Character.toUpperCase(column.getPossibleLetters().get(i - 1)) + " ";
@@ -108,6 +126,18 @@ public class GuessTracker {
             output += "\n";
         }
 
+        return output;
+    }
+
+    private String hitsToString() {
+        String output = "";
+        for (boolean slot : wasAHit) {
+            if (slot) {
+                output += "*  ";
+            } else {
+                output += "   ";
+            }
+        }
         return output;
     }
 

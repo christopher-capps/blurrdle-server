@@ -28,6 +28,10 @@ public class GuessChecker {
 
     public GuessTracker updateTracker(GuessTracker tracker, String answer) {
 
+        for (boolean slot : tracker.wasAHit) {
+            slot = false;
+        }
+
         for (int i = 0; i < answer.length(); i++) {
 
             Character answerCharLeft = '?';
@@ -56,6 +60,7 @@ public class GuessChecker {
                 }
 
                 tracker.addLetter(i, tracker.guessChar(i));
+                tracker.markHit(i);
             }
         }
 
